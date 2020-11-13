@@ -1,31 +1,31 @@
-## ·şÎñÅäÖÃ
+## æœåŠ¡é…ç½®
 server:
-  # SpringBoot·şÎñ¶Ë¿ÚÅäÖÃ
+  # SpringBootæœåŠ¡ç«¯å£é…ç½®
   port: 8080
   servlet:
-    # Ó¦ÓÃµÄ·ÃÎÊÂ·¾¶
+    # åº”ç”¨çš„è®¿é—®è·¯å¾„
     context-path: /
   tomcat:
-    # tomcatµÄURI±àÂë
+    # tomcatçš„URIç¼–ç 
     uri-encoding: UTF-8
     threads:
-      # tomcat×î´óÏß³ÌÊı£¬Ä¬ÈÏÎª200
+      # tomcatæœ€å¤§çº¿ç¨‹æ•°ï¼Œé»˜è®¤ä¸º200
       max: 300
-      # TomcatÆô¶¯³õÊ¼»¯µÄÏß³ÌÊı£¬Ä¬ÈÏÖµ25
+      # Tomcatå¯åŠ¨åˆå§‹åŒ–çš„çº¿ç¨‹æ•°ï¼Œé»˜è®¤å€¼25
       min-spare: 30
 
-## SpringÅäÖÃ
+## Springé…ç½®
 spring:
-  # Ó¦ÓÃÃû³ÆÅäÖÃ
+  # åº”ç”¨åç§°é…ç½®
   application:
     name: cesium-demo
 
-  # jsonÊ±¼ä¸ñÊ½ÉèÖÃ
+  # jsonæ—¶é—´æ ¼å¼è®¾ç½®
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
-  # thymeleafÄ£°åÅäÖÃ
+  # thymeleafæ¨¡æ¿é…ç½®
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -34,74 +34,74 @@ spring:
     servlet.content-type: text/html
     cache: false
 
-  # mysql ÅäÖÃ
+  # mysql é…ç½®
   datasource:
-    # ÄÚÍø
+    # å†…ç½‘
     url: jdbc:mysql://172.17.11.249:3306/cesium_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
-    # ÍâÍø
+    # å¤–ç½‘
     #    url: jdbc:mysql://124.193.68.152:25506/fengshan_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
-    # ±¾µØ
+    # æœ¬åœ°
     #    url: jdbc:mysql://localhost:3306/fengshan_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
-    #Çı¶¯ÀàÃû£¬¿ÉÅä¿É²»Åä£¬Èç¹û²»ÅäÖÃ»á¸ù¾İurl×Ô¶¯Ê¶±ğdbType(Êı¾İ¿âÀàĞÍ)£¬È»ºóÑ¡ÔñÏàÓ¦µÄdriverClassName£¬½¨ÒéÅäÖÃ
+    #é©±åŠ¨ç±»åï¼Œå¯é…å¯ä¸é…ï¼Œå¦‚æœä¸é…ç½®ä¼šæ ¹æ®urlè‡ªåŠ¨è¯†åˆ«dbType(æ•°æ®åº“ç±»å‹)ï¼Œç„¶åé€‰æ‹©ç›¸åº”çš„driverClassNameï¼Œå»ºè®®é…ç½®
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # Ê¹ÓÃ°¢ÀïµÄdruidÊı¾İÔ´
+    # ä½¿ç”¨é˜¿é‡Œçš„druidæ•°æ®æº
     type: com.alibaba.druid.pool.DruidDataSource
-    # ÅäÖÃ¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters£¬È¥µôºó¼à¿Ø½çÃæsqlÎŞ·¨Í³¼Æ£¬'wall'ÓÃÓÚ·À»ğÇ½
+    # é…ç½®ç›‘æ§ç»Ÿè®¡æ‹¦æˆªçš„filtersï¼Œå»æ‰åç›‘æ§ç•Œé¢sqlæ— æ³•ç»Ÿè®¡ï¼Œ'wall'ç”¨äºé˜²ç«å¢™
     filters: stat,wall,log4j
-    # ×î´óÁ¬½ÓÊı
+    # æœ€å¤§è¿æ¥æ•°
     maxActive: 20
-    # ³õÊ¼»¯Ê±½¨Á¢µÄÁ¬½ÓÊı
+    # åˆå§‹åŒ–æ—¶å»ºç«‹çš„è¿æ¥æ•°
     initialSize: 1
-    # »ñÈ¡Á¬½Ó×î´óµÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+    # è·å–è¿æ¥æœ€å¤§ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
     maxWait: 60000
-    #×îĞ¡Á¬½ÓÊı
+    #æœ€å°è¿æ¥æ•°
     minIdle: 1
 
-    #validationQuery: select 'x'   #Ğ£ÑéÁ¬½ÓÊÇ·ñÓĞĞ§µÄsql²éÑ¯Óï¾ä.£¬Èô²»ÅäÖÃ¸ÃÏî£¬ÔòÏÂÃæÈıÏîÅäÖÃÎŞĞ§
-    #    testWhileIdle: true   #µ±Á¬½Ó¿ÕÏĞtimeBetweenEvictionRunsMillisÊ±£¬ÊÇ·ñÖ´ĞĞÁ¬½Ó²âÊÔ
-    #    testOnBorrow: false   #µ±´ÓÁ¬½Ó³Ø½èÓÃÁ¬½ÓÊ±£¬ÊÇ·ñ²âÊÔ¸ÃÁ¬½Ó
-    #    testOnReturn: false   #ÔÚÁ¬½Ó¹é»¹µ½Á¬½Ó³ØÊ±ÊÇ·ñ²âÊÔ¸ÃÁ¬½Ó
+    #validationQuery: select 'x'   #æ ¡éªŒè¿æ¥æ˜¯å¦æœ‰æ•ˆçš„sqlæŸ¥è¯¢è¯­å¥.ï¼Œè‹¥ä¸é…ç½®è¯¥é¡¹ï¼Œåˆ™ä¸‹é¢ä¸‰é¡¹é…ç½®æ— æ•ˆ
+    #    testWhileIdle: true   #å½“è¿æ¥ç©ºé—²timeBetweenEvictionRunsMillisæ—¶ï¼Œæ˜¯å¦æ‰§è¡Œè¿æ¥æµ‹è¯•
+    #    testOnBorrow: false   #å½“ä»è¿æ¥æ± å€Ÿç”¨è¿æ¥æ—¶ï¼Œæ˜¯å¦æµ‹è¯•è¯¥è¿æ¥
+    #    testOnReturn: false   #åœ¨è¿æ¥å½’è¿˜åˆ°è¿æ¥æ± æ—¶æ˜¯å¦æµ‹è¯•è¯¥è¿æ¥
 
-    # ¿ÕÏĞÁ¬½Ó¼ì²é¡¢·ÏÆúÁ¬½ÓÇåÀí¡¢¿ÕÏĞÁ¬½Ó³Ø´óĞ¡µ÷ÕûÖ®¼äµÄ²Ù×÷Ê±¼ä¼ä¸ô
+    # ç©ºé—²è¿æ¥æ£€æŸ¥ã€åºŸå¼ƒè¿æ¥æ¸…ç†ã€ç©ºé—²è¿æ¥æ± å¤§å°è°ƒæ•´ä¹‹é—´çš„æ“ä½œæ—¶é—´é—´éš”
     timeBetweenEvictionRunsMillis: 60000
-    # Ò»¸ö¿ÕÏĞÁ¬½Ó×îÉÙ¿ÕÏĞ¶à¾Ãºó¿É±»Çå³ı
+    # ä¸€ä¸ªç©ºé—²è¿æ¥æœ€å°‘ç©ºé—²å¤šä¹…åå¯è¢«æ¸…é™¤
     minEvictableIdleTimeMillis: 300000
-    # ÊÇ·ñ´ò¿ªPSCache,»º´æPrepared Statements£¬
-    # ±¾ÖÊÉÏ¾ÍÊÇ»º´æÓÎ±ê£¨Ò»¸öconnectionÉÏÓĞÒ»¸öCache,Ò»ºĞcacheÔÊĞí»º´æ¶àÌõPrepared Statements£©£¬
-    # PSCache¶ÔÊ¹ÓÃÓÎ±êµÄÊı¾İ¿âÓĞ¾Ş´óµÄĞÔÄÜÌáÉı
+    # æ˜¯å¦æ‰“å¼€PSCache,ç¼“å­˜Prepared Statementsï¼Œ
+    # æœ¬è´¨ä¸Šå°±æ˜¯ç¼“å­˜æ¸¸æ ‡ï¼ˆä¸€ä¸ªconnectionä¸Šæœ‰ä¸€ä¸ªCache,ä¸€ç›’cacheå…è®¸ç¼“å­˜å¤šæ¡Prepared Statementsï¼‰ï¼Œ
+    # PSCacheå¯¹ä½¿ç”¨æ¸¸æ ‡çš„æ•°æ®åº“æœ‰å·¨å¤§çš„æ€§èƒ½æå‡
     poolPreparedStatements: true
-    # µ¥¸öÁ¬½ÓÓµÓĞµÄ×î´ó»º´æÊı
+    # å•ä¸ªè¿æ¥æ‹¥æœ‰çš„æœ€å¤§ç¼“å­˜æ•°
     maxOpenPreparedStatements: 20
 
-## ¸ÃÅäÖÃ½ÚµãÎª¶ÀÁ¢µÄ½Úµã£¬ÓĞºÜ¶àÍ¬Ñ§ÈİÒ×½«Õâ¸öÅäÖÃ·ÅÔÚspringµÄ½ÚµãÏÂ£¬µ¼ÖÂÅäÖÃÎŞ·¨±»Ê¶±ğ
+## è¯¥é…ç½®èŠ‚ç‚¹ä¸ºç‹¬ç«‹çš„èŠ‚ç‚¹ï¼Œæœ‰å¾ˆå¤šåŒå­¦å®¹æ˜“å°†è¿™ä¸ªé…ç½®æ”¾åœ¨springçš„èŠ‚ç‚¹ä¸‹ï¼Œå¯¼è‡´é…ç½®æ— æ³•è¢«è¯†åˆ«
 mybatis:
-  # ×¢Òâ£ºÒ»¶¨Òª¶ÔÓ¦mapperÓ³ÉäxmlÎÄ¼şµÄËùÔÚÂ·¾¶
+  # æ³¨æ„ï¼šä¸€å®šè¦å¯¹åº”mapperæ˜ å°„xmlæ–‡ä»¶çš„æ‰€åœ¨è·¯å¾„
   mapper-locations: classpath:mapper/*.xml
-  # ×¢Òâ£º¶ÔÓ¦ÊµÌåÀàµÄÂ·¾¶
+  # æ³¨æ„ï¼šå¯¹åº”å®ä½“ç±»çš„è·¯å¾„
   type-aliases-package: com.lingtu.cesiumdemo.pojo
-  # ¹ÜÀímybatisµÄÅäÖÃ
+  # ç®¡ç†mybatisçš„é…ç½®
   configuration:
-    # ÔÚ¿ØÖÆÌ¨´òÓ¡sql
+    # åœ¨æ§åˆ¶å°æ‰“å°sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # Ê¹ÓÃÍÕ·åÃüÃû·¨×ª»»×Ö¶Î
+    # ä½¿ç”¨é©¼å³°å‘½åæ³•è½¬æ¢å­—æ®µ
     mapUnderscoreToCamelCase: true
-    # ÏÔÊ¾ÖµÎªnullµÄ×Ö¶Î
+    # æ˜¾ç¤ºå€¼ä¸ºnullçš„å­—æ®µ
     call-setters-on-nulls: true
 
-  ## pagehelper·ÖÒ³²å¼ş
+  ## pagehelperåˆ†é¡µæ’ä»¶
 pagehelper:
-  # ±êÊ¶¸Ã²å¼şÊÇÒªÕë¶ÔÄÄÒ»ÖÖÊı¾İ¿â½øĞĞ´¦Àí
+  # æ ‡è¯†è¯¥æ’ä»¶æ˜¯è¦é’ˆå¯¹å“ªä¸€ç§æ•°æ®åº“è¿›è¡Œå¤„ç†
   helperDialect: mysql
-  # ·ÖÒ³ºÏÀí»¯²ÎÊı£¬
-  # µ±¸Ã²ÎÊıÉèÖÃÎª true Ê±£¬pageNum<=0 Ê±»á²éÑ¯µÚÒ»Ò³£¬ pageNum>pages£¨³¬¹ı×ÜÊıÊ±£©£¬»á²éÑ¯×îºóÒ»Ò³¡£
-  # ÉèÖÃÎªfalseÊ±£¬Èç¹ûpageNum<1»òpageNum>pages»á·µ»Ø¿ÕÊı¾İ
+  # åˆ†é¡µåˆç†åŒ–å‚æ•°ï¼Œ
+  # å½“è¯¥å‚æ•°è®¾ç½®ä¸º true æ—¶ï¼ŒpageNum<=0 æ—¶ä¼šæŸ¥è¯¢ç¬¬ä¸€é¡µï¼Œ pageNum>pagesï¼ˆè¶…è¿‡æ€»æ•°æ—¶ï¼‰ï¼Œä¼šæŸ¥è¯¢æœ€åä¸€é¡µã€‚
+  # è®¾ç½®ä¸ºfalseæ—¶ï¼Œå¦‚æœpageNum<1æˆ–pageNum>pagesä¼šè¿”å›ç©ºæ•°æ®
   reasonable: true
-  # 1.Ö§³ÖÍ¨¹ı Mapper ½Ó¿Ú²ÎÊıÀ´´«µİ·ÖÒ³²ÎÊı£¬List<Country> list = countryMapper.selectIf(1);
-  # 2.Èç¹ûÉèÖÃÎªtrue,Èô´«Èë²ÎÊıÖĞÓĞpageNumºÍpageSizeÁ½¸ö²ÎÊı£¬Ôò»á×Ô¶¯·ÖÒ³£¬²»¹ÜÓĞÃ»ÓĞÖ´ĞĞ PageHelper.startPage£¨£©
+  # 1.æ”¯æŒé€šè¿‡ Mapper æ¥å£å‚æ•°æ¥ä¼ é€’åˆ†é¡µå‚æ•°ï¼ŒList<Country> list = countryMapper.selectIf(1);
+  # 2.å¦‚æœè®¾ç½®ä¸ºtrue,è‹¥ä¼ å…¥å‚æ•°ä¸­æœ‰pageNumå’ŒpageSizeä¸¤ä¸ªå‚æ•°ï¼Œåˆ™ä¼šè‡ªåŠ¨åˆ†é¡µï¼Œä¸ç®¡æœ‰æ²¡æœ‰æ‰§è¡Œ PageHelper.startPageï¼ˆï¼‰
   supportMethodsArguments: true
-  # ÎªÁËÖ§³ÖstartPage(Object params)·½·¨£¬Ôö¼ÓÁË¸Ã²ÎÊıÀ´ÅäÖÃ²ÎÊıÓ³Éä£¬ÓÃÓÚ´Ó¶ÔÏóÖĞ¸ù¾İÊôĞÔÃûÈ¡Öµ£¬
-  # ¿ÉÒÔÅäÖÃÎª£º pageNum,pageSize,count,pageSizeZero,reasonable£¬
-  # Èô²»ÅäÖÃ£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµÎª£ºpageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
+  # ä¸ºäº†æ”¯æŒstartPage(Object params)æ–¹æ³•ï¼Œå¢åŠ äº†è¯¥å‚æ•°æ¥é…ç½®å‚æ•°æ˜ å°„ï¼Œç”¨äºä»å¯¹è±¡ä¸­æ ¹æ®å±æ€§åå–å€¼ï¼Œ
+  # å¯ä»¥é…ç½®ä¸ºï¼š pageNum,pageSize,count,pageSizeZero,reasonableï¼Œ
+  # è‹¥ä¸é…ç½®ï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼ä¸ºï¼špageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
   params: count=countSql
