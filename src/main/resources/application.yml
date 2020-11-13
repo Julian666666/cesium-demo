@@ -1,0 +1,107 @@
+## 服务配置
+server:
+  # SpringBoot服务端口配置
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 300
+      # Tomcat启动初始化的线程数，默认值25
+      min-spare: 30
+
+## Spring配置
+spring:
+  # 应用名称配置
+  application:
+    name: cesium-demo
+
+  # json时间格式设置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  # thymeleaf模板配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet.content-type: text/html
+    cache: false
+
+  # mysql 配置
+  datasource:
+    # 内网
+    url: jdbc:mysql://172.17.11.249:3306/cesium_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    # 外网
+    #    url: jdbc:mysql://124.193.68.152:25506/fengshan_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    # 本地
+    #    url: jdbc:mysql://localhost:3306/fengshan_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    #驱动类名，可配可不配，如果不配置会根据url自动识别dbType(数据库类型)，然后选择相应的driverClassName，建议配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 使用阿里的druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    # 最大连接数
+    maxActive: 20
+    # 初始化时建立的连接数
+    initialSize: 1
+    # 获取连接最大等待时间，单位：毫秒
+    maxWait: 60000
+    #最小连接数
+    minIdle: 1
+
+    #validationQuery: select 'x'   #校验连接是否有效的sql查询语句.，若不配置该项，则下面三项配置无效
+    #    testWhileIdle: true   #当连接空闲timeBetweenEvictionRunsMillis时，是否执行连接测试
+    #    testOnBorrow: false   #当从连接池借用连接时，是否测试该连接
+    #    testOnReturn: false   #在连接归还到连接池时是否测试该连接
+
+    # 空闲连接检查、废弃连接清理、空闲连接池大小调整之间的操作时间间隔
+    timeBetweenEvictionRunsMillis: 60000
+    # 一个空闲连接最少空闲多久后可被清除
+    minEvictableIdleTimeMillis: 300000
+    # 是否打开PSCache,缓存Prepared Statements，
+    # 本质上就是缓存游标（一个connection上有一个Cache,一盒cache允许缓存多条Prepared Statements），
+    # PSCache对使用游标的数据库有巨大的性能提升
+    poolPreparedStatements: true
+    # 单个连接拥有的最大缓存数
+    maxOpenPreparedStatements: 20
+
+## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  # 注意：一定要对应mapper映射xml文件的所在路径
+  mapper-locations: classpath:mapper/*.xml
+  # 注意：对应实体类的路径
+  type-aliases-package: com.lingtu.cesiumdemo.pojo
+  # 管理mybatis的配置
+  configuration:
+    # 在控制台打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 使用驼峰命名法转换字段
+    mapUnderscoreToCamelCase: true
+    # 显示值为null的字段
+    call-setters-on-nulls: true
+
+  ## pagehelper分页插件
+pagehelper:
+  # 标识该插件是要针对哪一种数据库进行处理
+  helperDialect: mysql
+  # 分页合理化参数，
+  # 当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。
+  # 设置为false时，如果pageNum<1或pageNum>pages会返回空数据
+  reasonable: true
+  # 1.支持通过 Mapper 接口参数来传递分页参数，List<Country> list = countryMapper.selectIf(1);
+  # 2.如果设置为true,若传入参数中有pageNum和pageSize两个参数，则会自动分页，不管有没有执行 PageHelper.startPage（）
+  supportMethodsArguments: true
+  # 为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值，
+  # 可以配置为： pageNum,pageSize,count,pageSizeZero,reasonable，
+  # 若不配置，则使用默认值为：pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
+  params: count=countSql
