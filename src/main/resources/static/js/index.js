@@ -6,8 +6,48 @@
  * @Version 1.0
  */
 
-var viewer = new Cesium.Viewer("cesiumContainer");
+// let googleMap = new Cesium.UrlTemplateImageryProvider({
+//     // url: "http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali",
+//     url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+//     minimumLevel: 1,
+//     maximumLevel: 20
+// });
+
+var viewer = new Cesium.Viewer("cesiumContainer", {
+    //是否创建动画小器件，左下角仪表
+    animation: false,
+    //是否显示全屏按钮
+    fullscreenButton: false,
+    //放大镜图标，查找位置工具，查找到之后会将镜头对准找到的地址，默认使用bing地图
+    geocoder: false,
+    //房子图标，是否显示Home按钮，视角返回初始位置
+    homeButton: true,
+    //是否显示信息框
+    infoBox: false,
+    //经纬网图标，选择视角的模式，有三种：3D，2D，哥伦布视图（2.5D)，是否显示3D/2D选择器
+    sceneModePicker: true,
+    //是否显示时间轴
+    timeline: false,
+    //设定3维地图的默认场景模式:Cesium.SceneMode.SCENE2D、Cesium.SceneMode.SCENE3D、Cesium.SceneMode.MORPHING
+    sceneMode: Cesium.SceneMode.SCENE3D,
+    //如果设置为true，则所有几何图形以3D模式绘制以节约GPU资源
+    scene3DOnly: false,
+    //是否显示图层选择器，可选择要显示的地图服务和地形服务
+    baseLayerPicker: false,
+    // 加载本地瓦片
+    // imageryProvider: googleMap,
+    //问号图标，右上角导航帮助按钮，显示默认的地图控制帮助
+    navigationHelpButton: false,
+    //虚拟现实
+    vrButton: false,
+    //是否显示选取指示器组件
+    selectionIndicator: false,
+    //设置背景透明
+    orderIndependentTranslucency:false
+});
 var scene = viewer.scene;
+//显示帧率
+scene.debugShowFramesPerSecond = true;
 
 var tileset = scene.primitives.add(
     new Cesium.Cesium3DTileset({
@@ -204,135 +244,6 @@ tileset.tileLoad.addEventListener(function (tile) {
 tileset.tileUnload.addEventListener(function (tile) {
     processTileFeatures(tile, unloadFeature);
 });
-
-// let googleMap = new Cesium.UrlTemplateImageryProvider({
-//     // url: "http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali",
-//     url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
-//     minimumLevel: 1,
-//     maximumLevel: 20
-// });
-// var viewer = new Cesium.Viewer("cesiumContainer", {
-//     // 加载本地瓦片
-//     imageryProvider: googleMap,
-// });
-// viewer.clock.currentTime = new Cesium.JulianDate(2457522.154792);
-//
-// var tileset = new Cesium.Cesium3DTileset({
-//     url:
-//         "tile/tileset.json",
-// });
-//
-// viewer.scene.primitives.add(tileset);
-// viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.0, -0.3, 0.0));
-//
-// var styles = [];
-// function addStyle(name, style) {
-//     styles.push({
-//         name: name,
-//         style: style,
-//     });
-// }
-//
-// addStyle("No style", {});
-//
-// addStyle("Color by building", {
-//     color: {
-//         conditions: [
-//             ["${building_name} === 'building0'", "color('purple')"],
-//             ["${building_name} === 'building1'", "color('red')"],
-//             ["${building_name} === 'building2'", "color('orange')"],
-//             ["true", "color('blue')"],
-//         ],
-//     },
-// });
-//
-// addStyle("Color all doors", {
-//     color: {
-//         conditions: [
-//             ["isExactClass('door')", "color('orange')"],
-//             ["true", "color('white')"],
-//         ],
-//     },
-// });
-//
-// addStyle("Color all features derived from door", {
-//     color: {
-//         conditions: [
-//             ["isClass('door')", "color('orange')"],
-//             ["true", "color('white')"],
-//         ],
-//     },
-// });
-//
-// addStyle("Color features by class name", {
-//     defines: {
-//         suffix: "regExp('door(.*)').exec(getExactClassName())",
-//     },
-//     color: {
-//         conditions: [
-//             ["${suffix} === 'knob'", "color('yellow')"],
-//             ["${suffix} === ''", "color('lime')"],
-//             ["${suffix} === null", "color('gray')"],
-//             ["true", "color('blue')"],
-//         ],
-//     },
-// });
-//
-// addStyle("Style by height", {
-//     color: {
-//         conditions: [
-//             ["${height} >= 10", "color('purple')"],
-//             ["${height} >= 6", "color('red')"],
-//             ["${height} >= 5", "color('orange')"],
-//             ["true", "color('blue')"],
-//         ],
-//     },
-// });
-//
-// function setStyle(style) {
-//     return function () {
-//         tileset.style = new Cesium.Cesium3DTileStyle(style);
-//     };
-// }
-//
-// var styleOptions = [];
-// for (var i = 0; i < styles.length; ++i) {
-//     var style = styles[i];
-//     styleOptions.push({
-//         text: style.name,
-//         onselect: setStyle(style.style),
-//     });
-// }
-//
-// // Sandcastle.addToolbarMenu(styleOptions);
-//
-// var handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
-//
-// // When a feature is left clicked, print its class name and properties
-// handler.setInputAction(function (movement) {
-//     var feature = viewer.scene.pick(movement.position);
-//     if (!Cesium.defined(feature)) {
-//         return;
-//     }
-//     console.log("Class: " + feature.getExactClassName());
-//     console.log("Properties:");
-//     var propertyNames = feature.getPropertyNames();
-//     var length = propertyNames.length;
-//     for (var i = 0; i < length; ++i) {
-//         var name = propertyNames[i];
-//         var value = feature.getProperty(name);
-//         console.log("  " + name + ": " + value);
-//     }
-// }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-//
-// // When a feature is middle clicked, hide it
-// handler.setInputAction(function (movement) {
-//     var feature = viewer.scene.pick(movement.position);
-//     if (!Cesium.defined(feature)) {
-//         return;
-//     }
-//     feature.show = false;
-// }, Cesium.ScreenSpaceEventType.MIDDLE_CLICK);
 
 
 // let viewer = new Cesium.Viewer("cesiumContainer", {
